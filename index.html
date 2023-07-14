@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: 300px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .calculator input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .calculator .row {
+      display: flex;
+    }
+
+    .calculator .dis {
+      width: 280px;
+      
+    }
+
+    .calculator .row .button {
+      flex: 1;
+      margin: 5px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #eee;
+      border: 1px solid #ccc;
+    }
+
+    .calculator .row .button:hover {
+      background-color: #ddd;
+    }
+
+    .calculator .row .button.operator {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+
+    .calculator .row .button.clear {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="dis" id="input-field" readonly>
+    <div class="row">
+      <div class="button operator" onclick="appendToInput('[')">[</div>
+      <div class="button operator" onclick="appendToInput(']')">]</div>
+      <div class="button operator" onclick="clearInput()">CE</div>
+      <div class="button clear" onclick="clearInput()">C</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendToInput('7')">7</div>
+      <div class="button" onclick="appendToInput('8')">8</div>
+      <div class="button" onclick="appendToInput('9')">9</div>
+      <div class="button operator" onclick="appendToInput('/')">/</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendToInput('4')">4</div>
+      <div class="button" onclick="appendToInput('5')">5</div>
+      <div class="button" onclick="appendToInput('6')">6</div>
+      <div class="button operator" onclick="appendToInput('*')">*</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendToInput('1')">1</div>
+      <div class="button" onclick="appendToInput('2')">2</div>
+      <div class="button" onclick="appendToInput('3')">3</div>
+      <div class="button operator" onclick="appendToInput('-')">-</div>
+    </div>
+    <div class="row">
+      <div class="button" onclick="appendToInput('0')">0</div>
+      <div class="button" onclick="appendToInput('.')">.</div>
+      <div class="button operator" onclick="calculate()">=</div>
+      <div class="button operator" onclick="appendToInput('+')">+</div>
+    </div>
+  </div>
+
+  <script>
+    function appendToInput(value) {
+      document.getElementById('input-field').value += value;
+    }
+
+    function clearInput() {
+      document.getElementById('input-field').value = '';
+    }
+
+    function calculate() {
+      var input = document.getElementById('input-field').value;
+      input = input.replace(/\[/g, '(').replace(/\]/g, ')');
+      var result = eval(input);
+      document.getElementById('input-field').value = result;
+    }
+  </script>
+</body>
+</html>
